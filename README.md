@@ -12,7 +12,7 @@ You need lib zabbix-api and pip
 # apt-get install python-pip git
 # pip install zabbix-api
 
-$ git clone https://github.com/janssenlima/api-zabbix
+$ git clone https://github.com/possess1on/api-zabbix
 ```
 
 ## How to use - examples
