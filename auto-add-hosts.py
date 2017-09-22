@@ -6,12 +6,12 @@
 from zabbix_api import ZabbixAPI
 import csv
 
-zapi = ZabbixAPI(server="http://localhost/zabbix")
+zapi = ZabbixAPI(server="http://IP/zabbix/")
 zapi.login("Admin", "zabbix")
 
-f = csv.reader(open('/tmp/hosts.csv'), delimiter=';')
-for [hostname,ip] in f:
-    print "Cadastrando host da linha ", f.line_num
+f = csv.reader(open('/home/sd/hosts.csv'), delimiter=';')
+for [hostname,ip,lat,lon,loc,name] in f:
+    print "Host succesful added ", f.line_num
     hostcriado = zapi.host.create({
         "host": hostname,
         "status": 1,
@@ -34,5 +34,14 @@ for [hostname,ip] in f:
             {
                 "templateid": 10001
             }
-        ]
-    })
+        ],
+"inventory_mode": 0,
+        "inventory":
+           {
+"location_lat": lat,
+"location_lon": lon,
+"location": loc,
+"name": name,
+}
+
+   })
