@@ -7,8 +7,8 @@
 from zabbix_api import ZabbixAPI
 import csv
 
-zapi = ZabbixAPI(server="http://zabuv01.fortebank.com/zabbix/")
-zapi.login("Admin", "Rty7nbhjgkm")
+zapi = ZabbixAPI(server="http://ip/zabbix/")
+zapi.login("login", "password")
 
 f = csv.reader(open('/home/sd/hosts.csv'), delimiter=';')
 for [name,hostname,model,alias,loc,lat,lon,ip,type,tid,gid] in f:
