@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -6,15 +7,15 @@
 from zabbix_api import ZabbixAPI
 import csv
 
-zapi = ZabbixAPI(server="http://IP/zabbix/")
-zapi.login("Admin", "zabbix")
+zapi = ZabbixAPI(server="http://zabuv01.fortebank.com/zabbix/")
+zapi.login("Admin", "Rty7nbhjgkm")
 
 f = csv.reader(open('/home/sd/hosts.csv'), delimiter=';')
-for [hostname,ip,lat,lon,loc,name] in f:
+for [name,hostname,model,alias,loc,lat,lon,ip,type,tid,gid] in f:
     print "Host succesful added ", f.line_num
     hostcriado = zapi.host.create({
         "host": hostname,
-        "status": 1,
+        "status": 0,
         "interfaces": [
             {
                 "type": 1,
@@ -27,21 +28,24 @@ for [hostname,ip,lat,lon,loc,name] in f:
         ],
         "groups": [
             {
-                "groupid": 2
+                "groupid": gid
             }
         ],
         "templates": [
             {
-                "templateid": 10001
+                "templateid": tid
             }
         ],
-"inventory_mode": 0,
+        "inventory_mode": 0,
         "inventory":
-           {
-"location_lat": lat,
-"location_lon": lon,
-"location": loc,
-"name": name,
-}
+            {
+                "location_lat": lat,
+                "location_lon": lon,
+                "location": loc,
+                "name": name,
+                "type": type,
+                "alias": alias,
+"model": model
+            }
 
    })
